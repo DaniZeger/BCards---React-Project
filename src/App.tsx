@@ -1,25 +1,104 @@
-import React from 'react';
+import React, { createContext, useMemo, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Route, Routes } from 'react-router-dom';
+import { teal, indigo, cyan, amber, deepOrange, grey } from '@mui/material/colors';
+import { CssBaseline, PaletteMode } from '@mui/material';
+import { useTheme } from '@emotion/react';
+import { light } from '@mui/material/styles/createPalette';
+import Brightness2Icon from '@mui/icons-material/Brightness2';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Footer from './components/Footer/Footer';
+import HomePage from './pages/HomePage';
+import SignUpPage from './auth/signUpPage';
+import LogInPage from './auth/logInPage';
+import { USER } from './services/usersApi';
+import AboutPage from './pages/AboutPage';
+import MyCardsPage from './pages/MyCardsPage';
+import AddCardPage from './pages/AddCardPage';
+import { CARDS } from './services/cardsApi';
+import EditCardPage from './pages/EditCardPage';
+const getDesignTokens = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    primary: {
+      ...teal,
+      ...(mode === 'dark' && {
+        main: '#282C34',
+      }),
+    },
+    ...(mode === 'dark' && {
+      mode,
+      background: {
+        default: '#282C34',
+        paper: '#282C34',
+      },
+    }),
+    text: {
+      ...(mode === 'light'
+        ? {
+          primary: grey[900],
+          secondary: grey[800],
+        }
+        : {
+          primary: '#4dd0e1',
+          secondary: cyan[50],
+        }),
+    },
+  },
+});
+
+interface CONTEXT {
+  user: USER | null,
+  setUser: Function
+}
+
+export const userContext = createContext<CONTEXT | null>(null)
 
 function App() {
+  const theme = useTheme()
+  const [mode, setMode] = useState<'light' | 'dark'>('light')
+  const modeTheme = createTheme(getDesignTokens(mode));
+  const [user, setUser] = useState<USER | null>(null)
+
+  function handleMode() {
+    const toggleMode = mode === 'dark' ? 'light' : 'dark'
+    setMode(toggleMode)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <userContext.Provider value={{ user, setUser }}>
+        <ThemeProvider theme={modeTheme}>
+          <CssBaseline />
+          <Navbar mode={handleMode}>
+            {
+              mode === 'light' &&
+              <Brightness2Icon />
+            }
+            {
+              mode === 'dark' &&
+              <Brightness7Icon />
+            }
+          </Navbar>
+          <div style={{ paddingBottom: '5.5rem' }}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="my-cards" element={<MyCardsPage />} />
+              <Route path="my-cards/add-card" element={<AddCardPage />} />
+              <Route path="edit/:id" element={<EditCardPage />} />
+              <Route path="sign-up" element={<SignUpPage />} />
+              <Route path="log-in" element={<LogInPage />} />
+            </Routes>
+          </div>
+
+          <Footer />
+        </ThemeProvider>
+      </userContext.Provider>
+    </>
   );
 }
 

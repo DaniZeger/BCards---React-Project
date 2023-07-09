@@ -1,0 +1,110 @@
+const bcrypt = require('bcrypt')
+
+// All passwords are 123456
+
+const USERS = [
+    {
+        firstName: "Main",
+        middleName: "",
+        lastName: "Admin",
+        phone: "+000 0000000000",
+        email: "admin@gmail.com",
+        password: '$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW',
+        imageUrl: "",
+        imageAlt: "",
+        state: "",
+        country: "Some Country",
+        city: "Some City",
+        street: "Some Street",
+        houseNumber: 0,
+        zipCode: "",
+        userType: 1
+    },
+    {
+        firstName: "John",
+        middleName: "Doe",
+        lastName: "Smith",
+        phone: "+1 123-456-7890",
+        email: "john.doe@example.com",
+        password: "$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW",
+        imageUrl: "https://example.com/john-doe.jpg",
+        imageAlt: "John Doe Profile Picture",
+        state: "California",
+        country: "United States",
+        city: "Los Angeles",
+        street: "123 Main Street",
+        houseNumber: 10,
+        zipCode: 90001,
+        userType: 3
+    },
+    {
+        firstName: "Alice",
+        middleName: "",
+        lastName: "Johnson",
+        phone: "+1 987-654-3210",
+        email: "alice.johnson@example.com",
+        password: "$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW",
+        imageUrl: "https://example.com/alice-johnson.jpg",
+        imageAlt: "Alice Johnson Profile Picture",
+        state: "New York",
+        country: "United States",
+        city: "New York City",
+        street: "456 Elm Street",
+        houseNumber: 15,
+        zipCode: 10001,
+        userType: 3
+    },
+    {
+        firstName: "Emma",
+        middleName: "Grace",
+        lastName: "Lee",
+        phone: "+1 555-123-4567",
+        email: "emma.lee@example.com",
+        password: "$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW",
+        imageUrl: "https://example.com/emma-lee.jpg",
+        imageAlt: "Emma Grace Lee Profile Picture",
+        state: "Texas",
+        country: "United States",
+        city: "Austin",
+        street: "789 Oak Avenue",
+        houseNumber: 20,
+        zipCode: 78701,
+        userType: 2
+    },
+    {
+        firstName: "Michael",
+        middleName: "James",
+        lastName: "Brown",
+        phone: "+1 111-222-3333",
+        email: "michael.brown@example.com",
+        password: "$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW",
+        imageUrl: "https://example.com/michael-brown.jpg",
+        imageAlt: "Michael James Brown Profile Picture",
+        state: "Florida",
+        country: "United States",
+        city: "Miami",
+        street: "321 Palm Street",
+        houseNumber: 5,
+        zipCode: 33101,
+        userType: 2
+    },
+    {
+        firstName: "Sophia",
+        middleName: "Grace",
+        lastName: "Wilson",
+        phone: "+1 444-555-6666",
+        email: "sophia.wilson@example.com",
+        password: "$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW",
+        imageUrl: "https://example.com/sophia-wilson.jpg",
+        imageAlt: "Sophia Grace Wilson Profile Picture",
+        state: "California",
+        country: "United States",
+        city: "San Francisco",
+        street: "567 Market Street",
+        houseNumber: 30,
+        zipCode: 94105,
+        userType: 3
+    }
+];
+
+module.exports = USERS
