@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import CardButtons from "./CardButtons";
 import { CARDS, deleteCards } from "../services/cardsApi";
 import { cardsContext } from "../pages/MyCardsPage";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 interface cardProps {
     image?: string,
@@ -45,30 +45,32 @@ function BCard({ image, title, subtitle, phone, address, cardId }: cardProps) {
 
     return (
         <Grid item xs={width > 700 ? 3 : 6}>
-            <Card sx={{ maxWidth: 275 }}>
-                <CardMedia
-                    sx={{ height: 150 }}
-                    image={image}
-                    title="green iguana"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {subtitle}
-                    </Typography>
-                    <hr></hr>
-                    <Typography variant="caption" color="text.secondary">
-                        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
-                            <li><strong>Phone:</strong> {phone}</li>
-                            <li><strong>Address:</strong> {address} </li>
-                            <li><strong>Card Number:</strong> {cardId}</li>
-                        </ul>
-                    </Typography>
-                </CardContent>
+            <Card id="cardBox" sx={{ maxWidth: 275 }}>
+                <NavLink to={`/card/${cardId}`}>
+                    <CardMedia
+                        sx={{ height: 150 }}
+                        image={image}
+                        title="green iguana"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            {title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {subtitle}
+                        </Typography>
+                        <hr></hr>
+                        <Typography variant="caption" color="text.secondary">
+                            <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+                                <li><strong>Phone:</strong> {phone}</li>
+                                <li><strong>Address:</strong> {address} </li>
+                                <li><strong>Card Number:</strong> {cardId}</li>
+                            </ul>
+                        </Typography>
+                    </CardContent>
 
-                <CardButtons handleClick={handleEdit} handleDelete={handleDelete} cardId={cardId} />
+                    <CardButtons handleClick={handleEdit} handleDelete={handleDelete} cardId={cardId} />
+                </NavLink>
             </Card>
         </Grid>
     );

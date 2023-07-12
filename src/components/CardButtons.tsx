@@ -4,8 +4,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { userContext } from "../App";
+import { FAV, removeFav, saveFav } from "../services/favorietsApi";
 
 interface Props {
     handleDelete: (cardId: string) => void;
@@ -17,6 +18,12 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
     const context = useContext(userContext)
     const location = useLocation()
     const showButtons = location.pathname.includes('my-cards')
+    const [fav, setFav] = useState(false)
+    const favCard: FAV = {
+        userId: context?.user?.id,
+        cardId: cardId
+    }
+
 
     function onDelete() {
         if (cardId) {
@@ -30,6 +37,7 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
         }
     }
 
+
     const justify = handleJustify()
     function handleJustify() {
         if (showButtons) {
@@ -38,6 +46,23 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
             return 'space-between'
         } else {
             return 'flex-end'
+        }
+    }
+
+    function handleFav() {
+        if (!fav) {
+            if (!cardId) return
+            saveFav(favCard)
+                .then(() => {
+                    setFav(!fav)
+                })
+        }
+        else {
+            if (!cardId) return
+            removeFav(favCard)
+                .then(() => {
+                    setFav(!fav)
+                })
         }
     }
 
@@ -52,7 +77,7 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
                 </ButtonGroup>
             }
             {
-                context?.user?.userType === 1 &&
+                context?.user?.userType === 1 && !location.pathname.includes('my-cards') &&
                 <ButtonGroup>
                     <IconButton onClick={onDelete}><DeleteIcon /></IconButton>
                 </ButtonGroup>
@@ -61,7 +86,7 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
                 <IconButton color="info"><PhoneIcon /></IconButton>
                 {
                     context?.user &&
-                    <IconButton><FavoriteIcon /></IconButton>
+                    <IconButton onClick={handleFav} color={fav ? 'error' : 'default'}><FavoriteIcon /></IconButton>
                 }
             </ButtonGroup>
         </CardActions>

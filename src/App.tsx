@@ -20,6 +20,8 @@ import MyCardsPage from './pages/MyCardsPage';
 import AddCardPage from './pages/AddCardPage';
 import { CARDS } from './services/cardsApi';
 import EditCardPage from './pages/EditCardPage';
+import FavCardsPage from './pages/FavCardsPage';
+import CardPag from './pages/CardPage';
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -87,6 +89,8 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/fav-cards" element={<FavCardsPage />} />
+              <Route path="card/:id" element={<CardPag />} />
               <Route path="my-cards" element={<MyCardsPage />} />
               <Route path="my-cards/add-card" element={<AddCardPage />} />
               <Route path="edit/:id" element={<EditCardPage />} />

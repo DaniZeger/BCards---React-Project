@@ -11,18 +11,8 @@ import ButtonsComponent from "../components/Forms/ButtunsComponent";
 import FormHeader from "../components/Forms/FormsHeader";
 import FormLayout from "../components/Forms/FormLayout";
 import InputContainer from "../components/Forms/InputContainer";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 150,
-        },
-    },
-};
-
+import PhoneCodeSelect from "../components/Forms/PhoneCodeSelect";
+import CountrySelect from "../components/Forms/CountrySelect";
 
 function SignUpPage() {
     const navigation = useNavigate()
@@ -184,27 +174,7 @@ function SignUpPage() {
 
                     <FormControlComponent label={"Last Name*"} placeHolder={"Last Name*"} width={"58ch"} marginValue="0 4px 0 0" inputValue={lastName} onChange={(e) => setLastName(e.target.value)} helperText={lastNameError} error={lastNameError.length > 0} />
 
-                    <FormControl sx={{ mx: 0.5, width: '11ch' }}>
-                        <InputLabel id="demo-multiple-name-label">+000</InputLabel>
-                        <Select
-                            labelId="demo-multiple-name-label"
-                            id="demo-multiple-name"
-                            value={countryCode}
-                            onChange={(e) => setCountryCode(e.target.value)}
-                            input={<OutlinedInput label="+000" />}
-                            MenuProps={MenuProps}
-                            error={phoneError.length > 0}
-                        >
-                            {countryCodeList.map((cc) => (
-                                <MenuItem
-                                    key={cc.id}
-                                    value={cc.phone}
-                                >
-                                    {cc.code3} | +{cc.phone}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    <PhoneCodeSelect value={countryCode} setValue={setCountryCode} array={countryCodeList} error={phoneError} />
 
                     <FormControlComponent label={"Phone*"} placeHolder={"Phone*"} width={"46ch"} marginValue="0 4px 0 0" inputValue={phone} onChange={(e) => setPhone(e.target.value)} helperText={phoneError} error={phoneError.length > 0} />
 
@@ -230,31 +200,8 @@ function SignUpPage() {
 
                     <FormControlComponent label={"State"} placeHolder={"State"} width={"50ch"} inputValue={state} onChange={(e) => setState(e.target.value)} helperText='' error={false} />
 
-                    <FormControl sx={{ width: '50ch' }}>
-                        <InputLabel id="demo-multiple-name-label">Country*</InputLabel>
-                        <Select
-                            labelId="demo-multiple-name-label"
-                            id="demo-multiple-name"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                            input={<OutlinedInput label="Country*" />}
-                            MenuProps={MenuProps}
-                            error={countryError.length > 0}
-                        >
-                            {countryCodeList.map((cc) => (
-                                <MenuItem
-                                    key={cc.id}
-                                    value={cc.name}
-                                >
-                                    {cc.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        {
-                            countryError.length > 0 && <FormHelperText style={{ color: '#DB2F2F' }}> {countryError} </FormHelperText>
-                        }
+                    <CountrySelect value={country} setValue={setCountry} error={error} array={countryCodeList} />
 
-                    </FormControl>
                 </InputContainer>
 
                 <InputContainer>

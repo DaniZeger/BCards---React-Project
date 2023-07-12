@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var countriesRouter = require('./routes/countries')
 var cardsRouter = require('./routes/cards')
+var favoritesRouter = require('./routes/favoriets')
 
 const headers = require('./middleware/headers');
 
@@ -23,6 +24,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/countries', countriesRouter);
 app.use('/cards', cardsRouter);
+app.use('/favorites', favoritesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
