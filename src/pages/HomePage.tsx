@@ -60,6 +60,7 @@ function HomePage() {
     const [search, setSearch] = useState("")
     const [filteredData, setFilteredData] = useState<Array<CARDS>>([])
     const [sort, setSort] = useState('Sort By')
+    const [isFav, setIsFav] = useState(false)
 
     useEffect(() => {
         getCards()
@@ -157,7 +158,7 @@ function HomePage() {
                             subtitle={card.subtitle}
                             phone={card.phone}
                             address={`${card.houseNumber} ${card.state}, ${card.city} ${card.state}, ${card.country}`}
-                            cardId={card._id}
+                            cardId={card._id ? card._id : ''}
                         />
                     )
                 }

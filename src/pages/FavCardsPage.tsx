@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext, createContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { FAV, USER_FAV, getUserCards } from "../services/favorietsApi"
 import { userContext } from "../App"
@@ -9,7 +9,8 @@ import { CARDS } from "../services/cardsApi"
 
 function FavCardsPage() {
     const navigation = useNavigate()
-    const [cardsData, setCardsData] = useState<Array<USER_FAV>>([])
+    const [fevCardsData, setFevCardsData] = useState<Array<USER_FAV>>([])
+    const [cardsData, setCardsData] = useState<Array<CARDS>>([])
     const context = useContext(userContext)
 
     useEffect(() => {
@@ -18,29 +19,37 @@ function FavCardsPage() {
         } else {
             getUserCards(context.user.id)
                 .then(json => {
-                    setCardsData(json)
-                    console.log(cardsData);
+                    setFevCardsData(json)
                 })
         }
     }, [])
+
+    useEffect(() => {
+        const cards: Array<CARDS> = []
+        fevCardsData.forEach(card => {
+            if (!card.cardId) return
+            cards.push(card.cardId)
+        });
+        setCardsData(cards)
+    }, [fevCardsData])
     return (
         <>
             <Header
-                title="My Cards"
-                subtitle={`Hallo ${context?.user?.firstName} mange your cards`}
+                title="Favorites Cards"
+                subtitle={`Here are all the cards you saved`}
             />
             <Grid
                 sx={{ marginTop: '1%', paddingX: '2%' }} container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 {
                     cardsData.map(card =>
                         <BCard
-                            key={card.cardId?._id}
-                            image={card.cardId?.imageUrl}
-                            title={card.cardId?.title}
-                            subtitle={card.cardId?.subtitle}
-                            phone={card.cardId?.phone}
-                            address={`${card.cardId?.houseNumber} ${card.cardId?.state}, ${card.cardId?.city} ${card.cardId?.state}, ${card.cardId?.country}`}
-                            cardId={card.cardId?._id}
+                            key={card._id}
+                            image={card.imageUrl}
+                            title={card.title}
+                            subtitle={card.subtitle}
+                            phone={card.phone}
+                            address={`${card.houseNumber} ${card.state}, ${card.city} ${card.state}, ${card.country}`}
+                            cardId={card._id ? card._id : ''}
                         />
                     )
                 }

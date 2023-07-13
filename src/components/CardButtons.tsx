@@ -6,7 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { userContext } from "../App";
-import { FAV, removeFav, saveFav } from "../services/favorietsApi";
+import { FavoriteContext } from "./FavoriteContext";
 
 interface Props {
     handleDelete: (cardId: string) => void;
@@ -18,12 +18,13 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
     const context = useContext(userContext)
     const location = useLocation()
     const showButtons = location.pathname.includes('my-cards')
-    const [fav, setFav] = useState(false)
-    const favCard: FAV = {
-        userId: context?.user?.id,
-        cardId: cardId
-    }
+    const { toggleFavorite, favorites } = useContext(FavoriteContext);
+    const isFavorite = favorites.includes(cardId || '');
+    const uContext = useContext(userContext)
 
+    const handleToggleFavorite = () => {
+        toggleFavorite(uContext?.user?.id || '', cardId || '');
+    };
 
     function onDelete() {
         if (cardId) {
@@ -37,7 +38,6 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
         }
     }
 
-
     const justify = handleJustify()
     function handleJustify() {
         if (showButtons) {
@@ -48,24 +48,6 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
             return 'flex-end'
         }
     }
-
-    function handleFav() {
-        if (!fav) {
-            if (!cardId) return
-            saveFav(favCard)
-                .then(() => {
-                    setFav(!fav)
-                })
-        }
-        else {
-            if (!cardId) return
-            removeFav(favCard)
-                .then(() => {
-                    setFav(!fav)
-                })
-        }
-    }
-
 
     return (
         <CardActions sx={{ display: 'flex', justifyContent: `${justify}` }}>
@@ -86,7 +68,7 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
                 <IconButton color="info"><PhoneIcon /></IconButton>
                 {
                     context?.user &&
-                    <IconButton onClick={handleFav} color={fav ? 'error' : 'default'}><FavoriteIcon /></IconButton>
+                    <IconButton onClick={handleToggleFavorite}> {isFavorite ? <FavoriteIcon color="error" /> : <FavoriteIcon />}</IconButton>
                 }
             </ButtonGroup>
         </CardActions>

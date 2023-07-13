@@ -54,7 +54,7 @@ function MyCardsPage() {
                             subtitle={card.subtitle}
                             phone={card.phone}
                             address={`${card.houseNumber} ${card.state}, ${card.city} ${card.state}, ${card.country}`}
-                            cardId={card._id}
+                            cardId={card?._id ? card?._id : ''}
                         />
                     )
                 }

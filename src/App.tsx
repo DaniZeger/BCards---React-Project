@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -18,11 +18,13 @@ import { USER } from './services/usersApi';
 import AboutPage from './pages/AboutPage';
 import MyCardsPage from './pages/MyCardsPage';
 import AddCardPage from './pages/AddCardPage';
-import { CARDS } from './services/cardsApi';
+import { CARDS, getCards, getUserCards } from './services/cardsApi';
 import EditCardPage from './pages/EditCardPage';
 import FavCardsPage from './pages/FavCardsPage';
 import CardPag from './pages/CardPage';
 import { LoadScript } from '@react-google-maps/api';
+import { USER_FAV } from './services/favorietsApi';
+import { FavoriteProvider } from './components/FavoriteContext';
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -66,6 +68,8 @@ function App() {
   const modeTheme = createTheme(getDesignTokens(mode));
   const [user, setUser] = useState<USER | null>(null)
 
+
+
   function handleMode() {
     const toggleMode = mode === 'dark' ? 'light' : 'dark'
     setMode(toggleMode)
@@ -73,38 +77,40 @@ function App() {
 
   return (
     <>
-      <LoadScript googleMapsApiKey={'AIzaSyAkq5m2UkIwTUXTZe4pZqtxKYtHz0l3zs4'}>
-        <userContext.Provider value={{ user, setUser }}>
-          <ThemeProvider theme={modeTheme}>
-            <CssBaseline />
-            <Navbar mode={handleMode}>
-              {
-                mode === 'light' &&
-                <Brightness2Icon />
-              }
-              {
-                mode === 'dark' &&
-                <Brightness7Icon />
-              }
-            </Navbar>
-            <div style={{ paddingBottom: '5.5rem' }}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/fav-cards" element={<FavCardsPage />} />
-                <Route path="card/:id" element={<CardPag />} />
-                <Route path="my-cards" element={<MyCardsPage />} />
-                <Route path="my-cards/add-card" element={<AddCardPage />} />
-                <Route path="edit/:id" element={<EditCardPage />} />
-                <Route path="sign-up" element={<SignUpPage />} />
-                <Route path="log-in" element={<LogInPage />} />
-              </Routes>
-            </div>
+      <FavoriteProvider>
+        <LoadScript googleMapsApiKey={'AIzaSyAkq5m2UkIwTUXTZe4pZqtxKYtHz0l3zs4'}>
+          <userContext.Provider value={{ user, setUser }}>
+            <ThemeProvider theme={modeTheme}>
+              <CssBaseline />
+              <Navbar mode={handleMode}>
+                {
+                  mode === 'light' &&
+                  <Brightness2Icon />
+                }
+                {
+                  mode === 'dark' &&
+                  <Brightness7Icon />
+                }
+              </Navbar>
+              <div style={{ paddingBottom: '5.5rem' }}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/fav-cards" element={<FavCardsPage />} />
+                  <Route path="card/:id" element={<CardPag />} />
+                  <Route path="my-cards" element={<MyCardsPage />} />
+                  <Route path="my-cards/add-card" element={<AddCardPage />} />
+                  <Route path="edit/:id" element={<EditCardPage />} />
+                  <Route path="sign-up" element={<SignUpPage />} />
+                  <Route path="log-in" element={<LogInPage />} />
+                </Routes>
+              </div>
 
-            <Footer />
-          </ThemeProvider>
-        </userContext.Provider>
-      </LoadScript>
+              <Footer />
+            </ThemeProvider>
+          </userContext.Provider>
+        </LoadScript>
+      </FavoriteProvider>
     </>
   );
 }

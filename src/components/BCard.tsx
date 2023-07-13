@@ -4,6 +4,8 @@ import CardButtons from "./CardButtons";
 import { CARDS, deleteCards } from "../services/cardsApi";
 import { cardsContext } from "../pages/MyCardsPage";
 import { NavLink, useNavigate } from "react-router-dom";
+import { userContext } from "../App";
+import { FavoriteContext } from "./FavoriteContext";
 
 interface cardProps {
     image?: string,
@@ -11,14 +13,19 @@ interface cardProps {
     subtitle?: string,
     phone?: string,
     address?: string,
-    cardId?: string
+    cardId: string,
+    isFav?: boolean,
 }
 
 
 function BCard({ image, title, subtitle, phone, address, cardId }: cardProps) {
+
     const [width, setWidth] = useState(window.innerWidth);
     const context = useContext(cardsContext)
+    const uContext = useContext(userContext)
     const navigation = useNavigate()
+
+
 
     useEffect(() => {
         function handleResize() {
@@ -38,6 +45,7 @@ function BCard({ image, title, subtitle, phone, address, cardId }: cardProps) {
                 console.error("Error deleting card:", error);
             });
     }
+
 
     function handleEdit(id: string) {
         navigation(`/edit/${id}`)
@@ -69,8 +77,8 @@ function BCard({ image, title, subtitle, phone, address, cardId }: cardProps) {
                         </Typography>
                     </CardContent>
 
-                    <CardButtons handleClick={handleEdit} handleDelete={handleDelete} cardId={cardId} />
                 </NavLink>
+                <CardButtons handleClick={handleEdit} handleDelete={handleDelete} cardId={cardId} />
             </Card>
         </Grid>
     );
