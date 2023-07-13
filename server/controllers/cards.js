@@ -75,7 +75,7 @@ module.exports = {
                 city: joi.string().required().min(2),
                 street: joi.string().required().min(2),
                 houseNumber: joi.string().required(),
-                zipCode: joi.number().required(),
+                zipCode: joi.string(),
                 userId: joi.string().required(),
 
             })

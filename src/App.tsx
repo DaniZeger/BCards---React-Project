@@ -22,6 +22,7 @@ import { CARDS } from './services/cardsApi';
 import EditCardPage from './pages/EditCardPage';
 import FavCardsPage from './pages/FavCardsPage';
 import CardPag from './pages/CardPage';
+import { LoadScript } from '@react-google-maps/api';
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -72,36 +73,38 @@ function App() {
 
   return (
     <>
-      <userContext.Provider value={{ user, setUser }}>
-        <ThemeProvider theme={modeTheme}>
-          <CssBaseline />
-          <Navbar mode={handleMode}>
-            {
-              mode === 'light' &&
-              <Brightness2Icon />
-            }
-            {
-              mode === 'dark' &&
-              <Brightness7Icon />
-            }
-          </Navbar>
-          <div style={{ paddingBottom: '5.5rem' }}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/fav-cards" element={<FavCardsPage />} />
-              <Route path="card/:id" element={<CardPag />} />
-              <Route path="my-cards" element={<MyCardsPage />} />
-              <Route path="my-cards/add-card" element={<AddCardPage />} />
-              <Route path="edit/:id" element={<EditCardPage />} />
-              <Route path="sign-up" element={<SignUpPage />} />
-              <Route path="log-in" element={<LogInPage />} />
-            </Routes>
-          </div>
+      <LoadScript googleMapsApiKey={'AIzaSyAkq5m2UkIwTUXTZe4pZqtxKYtHz0l3zs4'}>
+        <userContext.Provider value={{ user, setUser }}>
+          <ThemeProvider theme={modeTheme}>
+            <CssBaseline />
+            <Navbar mode={handleMode}>
+              {
+                mode === 'light' &&
+                <Brightness2Icon />
+              }
+              {
+                mode === 'dark' &&
+                <Brightness7Icon />
+              }
+            </Navbar>
+            <div style={{ paddingBottom: '5.5rem' }}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/fav-cards" element={<FavCardsPage />} />
+                <Route path="card/:id" element={<CardPag />} />
+                <Route path="my-cards" element={<MyCardsPage />} />
+                <Route path="my-cards/add-card" element={<AddCardPage />} />
+                <Route path="edit/:id" element={<EditCardPage />} />
+                <Route path="sign-up" element={<SignUpPage />} />
+                <Route path="log-in" element={<LogInPage />} />
+              </Routes>
+            </div>
 
-          <Footer />
-        </ThemeProvider>
-      </userContext.Provider>
+            <Footer />
+          </ThemeProvider>
+        </userContext.Provider>
+      </LoadScript>
     </>
   );
 }

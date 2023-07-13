@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 interface headerProps {
     title?: string,
     subtitle?: string
-    children?: ReactNode
+    children?: ReactNode,
 }
 
 function Header({ title, subtitle, children }: headerProps) {

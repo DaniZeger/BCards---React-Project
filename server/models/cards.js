@@ -17,7 +17,7 @@ const cardSchema = new mongoose.Schema({
         type: String,
         require: true,
         minlength: 2,
-        maxlength: 256,
+        maxlength: 1500,
     },
     phone: {
         type: String,
@@ -63,7 +63,7 @@ const cardSchema = new mongoose.Schema({
         require: true
     },
     zipCode: {
-        type: Number,
+        type: String,
         require: true,
         default: null
     },
