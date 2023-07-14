@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { CARDS, addCards, editCard, getCardById } from "../services/cardsApi";
 import { useNavigate, useParams } from "react-router-dom";
 import FormHeader from "../components/Forms/FormsHeader";
@@ -97,7 +97,7 @@ function EditCardPage() {
         userId: context?.user?.id
     }
 
-    function onEdit(e: React.FormEvent<HTMLFormElement>): void {
+    function onEdit(e: FormEvent<HTMLFormElement>): void {
         e.preventDefault()
         if (!formsLengthValidate(title) || !formsLengthValidate(subTitle) || !formsLengthValidate(description) || !formsRequireValidate(phone) || !formsMailValidate(email) || !formsRequireValidate(city) || !formsRequireValidate(street) || !formsRequireValidate(houseNumber) || !formsRequireValidate(country)) {
             if (!formsLengthValidate(title)) {

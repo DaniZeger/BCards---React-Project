@@ -25,6 +25,8 @@ import CardPag from './pages/CardPage';
 import { LoadScript } from '@react-google-maps/api';
 import { USER_FAV } from './services/favorietsApi';
 import { FavoriteProvider } from './components/FavoriteContext';
+import UserPage from './pages/UserPage';
+import EditUserPage from './pages/EditeUserPage';
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -103,6 +105,8 @@ function App() {
                   <Route path="edit/:id" element={<EditCardPage />} />
                   <Route path="sign-up" element={<SignUpPage />} />
                   <Route path="log-in" element={<LogInPage />} />
+                  <Route path="user-page/:id" element={<UserPage />} />
+                  <Route path="edit-user/:id" element={<EditUserPage />} />
                 </Routes>
               </div>
 

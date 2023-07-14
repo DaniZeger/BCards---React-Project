@@ -67,7 +67,7 @@ function AddCardPage() {
         city: city,
         street: street,
         houseNumber: houseNumber,
-        zipCode: +zipCode,
+        zipCode: zipCode,
         userId: context?.user?.id
     }
 

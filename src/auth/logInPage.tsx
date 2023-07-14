@@ -101,7 +101,7 @@ function LogInPage() {
                 }
                 <ButtonsComponent textAction="LOG IN" onClick={handleCancel} />
 
-                <Snackbar open={alert} autoHideDuration={2000} onClose={closeAlert} TransitionComponent={TransitionLeft}>
+                <Snackbar open={alert} autoHideDuration={1500} onClose={closeAlert} TransitionComponent={TransitionLeft}>
                     <Alert severity="success" sx={{ width: '100%' }}>
                         Welcome back <strong> {name}</strong>
                     </Alert>

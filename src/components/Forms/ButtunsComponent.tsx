@@ -36,9 +36,9 @@ function ButtonsComponent({ onClick, textAction }: Props) {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <ButtonGroup sx={{ m: 1 }} fullWidth={true} variant="outlined" aria-label="outlined button group">
-                    <Button sx={{ mr: 1 }} color="error" onClick={onClick}>CANCEL</Button>
-                    <Button sx={{ ml: 1 }} type="reset" color='neutral'> < ReplayIcon /> </Button>
+                <ButtonGroup sx={{ m: 1, columnGap: 2 }} fullWidth={true} variant="outlined" aria-label="outlined button group">
+                    <Button color="error" onClick={onClick}>CANCEL</Button>
+                    <Button type="reset" color='neutral'> < ReplayIcon /> </Button>
                 </ButtonGroup>
                 <Button sx={{ m: 1 }} fullWidth={true} variant="contained" type="submit" color='neutral'>{textAction}</Button>
             </ThemeProvider>

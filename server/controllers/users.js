@@ -36,7 +36,9 @@ module.exports = {
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                userType: user.userType
+                userType: user.userType,
+                imageUrl: user.imageUrl,
+                imageAlt: user.imageAlt
             });
         }
         catch (err) {
@@ -105,5 +107,128 @@ module.exports = {
             console.error(err);
             res.status(500).json({ error: err });
         }
-    }
+    },
+
+    getOneUser: async function (req, res, next) {
+        try {
+            const scheme = joi.object({
+                _id: joi.string().required(),
+            });
+
+            const { error, value } = scheme.validate({ _id: req.params.id });
+
+            if (error) {
+                console.log(error.details[0].message);
+                res.status(400).json({ error: "invalid data" });
+                return;
+            }
+
+            const result = await UserModel.findOne({ _id: value._id });
+            res.json(result);
+
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json({ error: "error get the user" });
+        }
+    },
+
+    deleteUser: async function (req, res, next) {
+        try {
+            const scheme = joi.object({
+                _id: joi.string().required(),
+            });
+
+            const { error, value } = scheme.validate({ _id: req.params.id });
+
+            if (error) {
+                console.log(error.details[0].message);
+                res.status(400).json({ error: "invalid data" });
+                return;
+            }
+
+            const deleted = await UserModel.findOne({ _id: value._id });
+
+            await UserModel.deleteOne(value).exec();
+            res.json(deleted);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json({ error: "error delete card" });
+        }
+    },
+
+    editUser: async function (req, res, next) {
+        try {
+            const scheme = joi.object({
+                firstName: joi.string().required().min(2),
+                middleName: joi.string().allow(null, ''),
+                lastName: joi.string().required().min(2),
+                phone: joi.string().required(),
+                email: joi.string().email().required(),
+                state: joi.string().allow(null, ''),
+                country: joi.string().min(2),
+                city: joi.string().required().min(2),
+                street: joi.string().required().min(2),
+                houseNumber: joi.number().required(),
+                zipCode: joi.number().required(),
+            })
+
+            const { error, value } = scheme.validate(req.body);
+
+            if (error) {
+                console.log(error.details[0].message);
+                res.status(400).json({ error: "invalid data" });
+                return;
+            }
+
+            const user = await UserModel.findOneAndUpdate({
+                _id: req.params.id
+            }, value)
+
+            if (!user) return res.status(404).send('Given ID was not found.');
+
+            const updated = await UserModel.findOne({ _id: req.params.id });
+            res.json(updated);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json({ error: "error delete card" });
+        }
+    },
+
+    editImage: async function (req, res, next) {
+        try {
+            const scheme = joi.object({
+                imageUrl: joi.string(),
+                imageAlt: joi.string(),
+            });
+
+            const { error, value } = scheme.validate(req.body);
+
+            if (error) {
+                console.log(error.details[0].message);
+                res.status(400).json({ error: "invalid data" });
+                return;
+            }
+
+            const user = await UserModel.findOneAndUpdate({
+                _id: req.params.id
+            }, value)
+
+            if (!user) return res.status(404).send('Given ID was not found.');
+
+            const updated = await UserModel.findOne({ _id: req.params.id });
+            res.json(updated);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json({ error: "error delete card" });
+        }
+    },
+
+
+
+
+
 }

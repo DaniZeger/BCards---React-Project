@@ -75,7 +75,7 @@ module.exports = {
                 city: joi.string().required().min(2),
                 street: joi.string().required().min(2),
                 houseNumber: joi.string().required(),
-                zipCode: joi.string(),
+                zipCode: joi.string().allow(null, ''),
                 userId: joi.string().required(),
 
             })
@@ -135,7 +135,7 @@ module.exports = {
                 street: joi.string().required().min(2),
                 houseNumber: joi.string().required(),
                 zipCode: joi.number().required(),
-                userId: joi.string().required(),
+                userId: joi.string().required().allow(null, ''),
             })
 
             const { error, value } = schema.validate(req.body);

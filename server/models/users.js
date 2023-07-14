@@ -36,12 +36,10 @@ const userSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png'
     },
 
     imageAlt: {
         type: String,
-        default: 'User image'
     },
     state: {
         type: String,

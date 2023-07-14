@@ -222,9 +222,11 @@ function Navbar({ mode, children }: modeProps) {
                     {
                         context?.user &&
                         <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="John Dho">
-                                <Avatar alt={context.user.imageAlt} src={context.user.imageUrl} />
-                            </Tooltip>
+                            <NavLink to={`/user-page/${context.user.id}`}>
+                                <Tooltip title='Manage profile'>
+                                    <Avatar alt={context.user.imageAlt} src={context.user.imageUrl} />
+                                </Tooltip>
+                            </NavLink>
                         </Box>
                     }
                 </Toolbar>

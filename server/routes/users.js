@@ -8,4 +8,15 @@ router.post('/signup', users.signUp);
 // http://localhost:8080/users/login
 router.post('/login', users.login);
 
+// http://localhost:8080/users/id
+router.get('/:id', users.getOneUser);
+router.delete('/:id', users.deleteUser);
+router.put('/:id', users.editUser);
+
+// http://localhost:8080/users/update-image/id
+router.put('/update-image/:id', users.editImage);
+
+// http://localhost:8080/users/change-password/id
+router.put('/change-password/:id', users.editImage);
+
 module.exports = router;
