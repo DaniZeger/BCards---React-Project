@@ -6,6 +6,7 @@ import { CARDS, getCards } from "../services/cardsApi";
 import { userContext } from "../App";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import SearchInput from "../components/Forms/SearchInput";
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -57,7 +58,6 @@ enum SortDirection {
 function HomePage() {
     const [cardsData, setCardsData] = useState<Array<CARDS>>([])
     const context = useContext(userContext)
-    const [search, setSearch] = useState("")
     const [filteredData, setFilteredData] = useState<Array<CARDS>>([])
     const [sort, setSort] = useState('Sort By')
 
@@ -99,18 +99,6 @@ function HomePage() {
         setFilteredData(result);
     }
 
-
-    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value
-        setSearch(value)
-        const term = value.toLowerCase()
-        const result = [...cardsData].filter(card =>
-            card?.title?.toLowerCase().startsWith(term)
-        )
-        setFilteredData(result)
-    }
-
-
     return (
         <>
             <Header
@@ -118,17 +106,8 @@ function HomePage() {
                 subtitle="Here you can find business cards from all categories"
             />
             <div style={{ display: 'flex' }}>
-                <Search>
-                    <SearchIconWrapper>
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                        value={search}
-                        onChange={handleSearch}
-                    />
-                </Search>
+
+                <SearchInput filterKey='title' data={cardsData} setFilteredData={setFilteredData} />
 
                 <FormControl size="small" sx={{ mx: 0.5, width: '15ch' }}>
                     <Select

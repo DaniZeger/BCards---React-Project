@@ -1,61 +1,19 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Avatar, ButtonGroup, IconButton, Tooltip, InputBase, alpha, styled, FormControl, MenuItem, Select, SelectChangeEvent, FormHelperText, InputLabel, OutlinedInput, Snackbar, Alert, Slide, SlideProps } from "@mui/material";
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Avatar, ButtonGroup, IconButton, Tooltip, FormControl, MenuItem, Select, InputLabel, OutlinedInput, Snackbar, Alert, Slide, SlideProps } from "@mui/material";
 import Header from "../components/Header";
-import { ChangeEvent, useEffect, useState } from "react";
-import { TYPES, USER, deleteUser, editUser, getUsers, userType } from "../services/usersApi";
+import { useEffect, useState } from "react";
+import { USER, deleteUser, editUser, getUsers, userType } from "../services/usersApi";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SearchIcon from '@mui/icons-material/Search';
+
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import DialogComponent from "../components/DialogComponent";
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-    },
-}));
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: '20%',
-    },
-    border: '1px rgb(212, 212, 212) solid'
-}));
-
+import SearchInput from "../components/Forms/SearchInput";
 
 function SandboxPage() {
     const [alert, setAlert] = useState(false)
-    const typesList = userType
     const [usersList, setUsersList] = useState<Array<USER>>([])
     const [filteredData, setFilteredData] = useState<Array<USER>>([])
-    const [search, setSearch] = useState("")
     const [selectedUserType, setSelectedUserType] = useState(3)
     const [selectedId, setSelectedId] = useState('')
     const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -163,30 +121,11 @@ function SandboxPage() {
             });
     }
 
-    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value
-        setSearch(value)
-        const term = value.toLowerCase()
-        const result = [...usersList].filter(user =>
-            user?.firstName?.toLowerCase().startsWith(term)
-        )
-        setFilteredData(result)
-    }
     return (
         <>
             <Header title="Sandbox" subtitle="Manage you app's users" />
             <div style={{ display: 'flex' }}>
-                <Search>
-                    <SearchIconWrapper>
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
-                        value={search}
-                        onChange={handleSearch}
-                    />
-                </Search>
+                <SearchInput filterKey='firstName' data={usersList} setFilteredData={setFilteredData} />
             </div>
             <TableContainer sx={{ p: 2, maxWidth: '95%', m: 'auto' }}>
                 <Table aria-label="simple table">
