@@ -44,7 +44,7 @@ const USERS = [
         phone: "+1 987-654-3210",
         email: "alice.johnson@example.com",
         password: "$2b$10$o8xuvXC7b9Mb41ER.ldHAOZeFX5of8.yNAeZEnchMB8Eis/EvQytW",
-        imageUrl: "https://example.com/alice-johnson.jpg",
+        imageUrl: "",
         imageAlt: "Alice Johnson Profile Picture",
         state: "New York",
         country: "United States",

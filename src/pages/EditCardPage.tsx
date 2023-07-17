@@ -94,7 +94,7 @@ function EditCardPage() {
         street: street,
         houseNumber: houseNumber,
         zipCode: +zipCode,
-        userId: context?.user?.id
+        userId: context?.user?._id
     }
 
     function onEdit(e: FormEvent<HTMLFormElement>): void {

@@ -23,7 +23,7 @@ function MyCardsPage() {
         if (!context?.user) {
             navigation('/')
         } else {
-            getUserCards(context.user.id)
+            getUserCards(context.user._id)
                 .then(json => {
                     setCardsData(json)
                 })

@@ -68,7 +68,7 @@ function AddCardPage() {
         street: street,
         houseNumber: houseNumber,
         zipCode: zipCode,
-        userId: context?.user?.id
+        userId: context?.user?._id
     }
 
     function onAdd(e: React.FormEvent<HTMLFormElement>): void {

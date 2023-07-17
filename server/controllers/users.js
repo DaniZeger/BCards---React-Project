@@ -32,7 +32,7 @@ module.exports = {
 
             res.json({
                 token: token,
-                id: user._id,
+                _id: user._id,
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -154,7 +154,7 @@ module.exports = {
         }
         catch (err) {
             console.log(err);
-            res.status(400).json({ error: "error delete card" });
+            res.status(400).json({ error: "error delete user" });
         }
     },
 
@@ -172,6 +172,7 @@ module.exports = {
                 street: joi.string().required().min(2),
                 houseNumber: joi.number().required(),
                 zipCode: joi.number().required(),
+                userType: joi.number()
             })
 
             const { error, value } = scheme.validate(req.body);
@@ -193,7 +194,7 @@ module.exports = {
         }
         catch (err) {
             console.log(err);
-            res.status(400).json({ error: "error delete card" });
+            res.status(400).json({ error: "error update user" });
         }
     },
 
@@ -223,12 +224,19 @@ module.exports = {
         }
         catch (err) {
             console.log(err);
-            res.status(400).json({ error: "error delete card" });
+            res.status(400).json({ error: "error update user" });
         }
     },
 
-
-
-
+    getAll: async function (req, res, next) {
+        try {
+            const result = await UserModel.find({})
+            res.json(result);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json({ error: 'error getting cards' });
+        }
+    }
 
 }

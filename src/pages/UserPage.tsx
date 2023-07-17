@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
-import { USER, UserTypeEnum, deleteUser, editUserImage, getUserById } from "../services/usersApi";
+import { USER, deleteUser, editUserImage, getUserById } from "../services/usersApi";
 import { useNavigate, useParams } from "react-router-dom";
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';

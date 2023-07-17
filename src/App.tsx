@@ -27,6 +27,7 @@ import { USER_FAV } from './services/favorietsApi';
 import { FavoriteProvider } from './components/FavoriteContext';
 import UserPage from './pages/UserPage';
 import EditUserPage from './pages/EditeUserPage';
+import SandboxPage from './pages/SandboxPage';
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -107,6 +108,7 @@ function App() {
                   <Route path="log-in" element={<LogInPage />} />
                   <Route path="user-page/:id" element={<UserPage />} />
                   <Route path="edit-user/:id" element={<EditUserPage />} />
+                  <Route path="sandbox" element={<SandboxPage />} />
                 </Routes>
               </div>
 

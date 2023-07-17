@@ -1,15 +1,27 @@
 import { getToken } from "../auth/TokenManeger"
 
-export type UserType = 1 | 2 | 3
-
-export enum UserTypeEnum {
-    ADMIN = 1,
-    BUSINESS = 2,
-    REGULAR = 3
+export interface TYPES {
+    id: number,
+    type: string
 }
 
+export const userType = [
+    {
+        id: 1,
+        type: 'ADMIN'
+    },
+    {
+        id: 2,
+        type: 'BUSINESS'
+    },
+    {
+        id: 3,
+        type: 'REGULAR'
+    }
+]
+
 export interface USER {
-    id?: string,
+    _id?: string,
     firstName?: string,
     middleName?: string,
     lastName?: string,
@@ -57,8 +69,8 @@ export async function logIn(user: USER): Promise<USER> {
     return res.json()
 }
 
-export async function getUserById(id: string): Promise<USER> {
-    const res = await fetch(`${url}/${id}`, {
+export async function getUserById(_id: string): Promise<USER> {
+    const res = await fetch(`${url}${_id}`, {
         method: 'GET',
         headers: {
             'x-auth-token': getToken()
@@ -98,6 +110,11 @@ export async function editUser(_id: string, user: USER): Promise<USER> {
         },
         body: JSON.stringify(user)
     })
+    return res.json()
+}
+
+export async function getUsers(): Promise<Array<USER>> {
+    const res = await fetch(url)
     return res.json()
 }
 

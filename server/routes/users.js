@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 const users = require('../controllers/users');
 
+
+// http://localhost:8080/users
+router.get('/', users.getAll);
+
 // http://localhost:8080/users/signup
 router.post('/signup', users.signUp);
 
@@ -15,8 +19,5 @@ router.put('/:id', users.editUser);
 
 // http://localhost:8080/users/update-image/id
 router.put('/update-image/:id', users.editImage);
-
-// http://localhost:8080/users/change-password/id
-router.put('/change-password/:id', users.editImage);
 
 module.exports = router;

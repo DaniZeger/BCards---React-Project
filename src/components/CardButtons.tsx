@@ -23,7 +23,7 @@ function CardButtons({ handleDelete, cardId, handleClick }: Props) {
     const uContext = useContext(userContext)
 
     const handleToggleFavorite = () => {
-        toggleFavorite(uContext?.user?.id || '', cardId || '');
+        toggleFavorite(uContext?.user?._id || '', cardId || '');
     };
 
     function onDelete() {

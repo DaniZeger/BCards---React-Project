@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-const countriesInit = require('../controllers/countries')
-
 /**
  * Module dependencies.
  */

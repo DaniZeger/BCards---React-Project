@@ -60,7 +60,6 @@ function HomePage() {
     const [search, setSearch] = useState("")
     const [filteredData, setFilteredData] = useState<Array<CARDS>>([])
     const [sort, setSort] = useState('Sort By')
-    const [isFav, setIsFav] = useState(false)
 
     useEffect(() => {
         getCards()

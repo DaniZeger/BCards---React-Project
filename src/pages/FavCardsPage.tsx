@@ -17,7 +17,7 @@ function FavCardsPage() {
         if (!context?.user) {
             navigation('/')
         } else {
-            getUserCards(context.user.id)
+            getUserCards(context.user._id)
                 .then(json => {
                     setFevCardsData(json)
                 })
