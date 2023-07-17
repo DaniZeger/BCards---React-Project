@@ -1,52 +1,10 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, alpha, styled } from "@mui/material";
+import { FormControl, Grid, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import Header from "../components/Header";
 import BCard from "../components/BCard";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CARDS, getCards } from "../services/cardsApi";
-import { userContext } from "../App";
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import SearchInput from "../components/Forms/SearchInput";
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-    },
-}));
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: '20%',
-    },
-    border: '1px rgb(212, 212, 212) solid'
-}));
 
 enum SortDirection {
     titleAsc = 'titleAsc', // A-Z
@@ -57,7 +15,6 @@ enum SortDirection {
 
 function HomePage() {
     const [cardsData, setCardsData] = useState<Array<CARDS>>([])
-    const context = useContext(userContext)
     const [filteredData, setFilteredData] = useState<Array<CARDS>>([])
     const [sort, setSort] = useState('Sort By')
 

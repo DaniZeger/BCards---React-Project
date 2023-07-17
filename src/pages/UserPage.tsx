@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { USER, deleteUser, editUserImage, getUserById } from "../services/usersApi";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,7 +9,6 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { Alert, Button, ButtonGroup, Grid, IconButton, List, ListItem, ListItemIcon, ListItemText, Slide, SlideProps, Snackbar, Tooltip } from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
 import LogoutIcon from '@mui/icons-material/Logout';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { userContext } from "../App";
 import DialogComponent from "../components/DialogComponent";
 import FormControlComponent from "../components/Forms/FormControlComponent";
@@ -47,7 +46,6 @@ function UserPage() {
                 console.error("Error deleting card:", error);
             });
     }
-
 
     // Image form dialog
     const handleOpenImageForm = () => {
@@ -159,7 +157,6 @@ function UserPage() {
                         </ListItem>
                     </List>
                     <ButtonGroup sx={{ m: 2, columnGap: 2 }} aria-label="medium secondary button group">
-                        {/* <Button startIcon={<VpnKeyIcon />} variant="contained">Change Password</Button> */}
                         <Button onClick={navToEdit} startIcon={<EditIcon />} variant="contained">Edit Details</Button>
                     </ButtonGroup>
                 </Grid>

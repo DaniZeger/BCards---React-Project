@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { USER, deleteUser, editUser, getUsers, userType } from "../services/usersApi";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import DialogComponent from "../components/DialogComponent";
@@ -40,7 +39,6 @@ function SandboxPage() {
     function handleClick(id: string | undefined) {
         if (!id) return
         setSelectedId(id)
-        console.log(selectedId);
     }
 
     function handleEdit(id: string, user: USER) {

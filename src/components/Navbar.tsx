@@ -11,8 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Brightness2Icon from '@mui/icons-material/Brightness2';
-import { styled, alpha } from '@mui/material/styles';
 import { useContext, useState } from 'react';
 import { userContext } from '../App';
 import { NavLink } from 'react-router-dom';

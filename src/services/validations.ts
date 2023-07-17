@@ -45,44 +45,4 @@ export function formsMailValidate(email: string): boolean {
 }
 
 
-export function formsValidation(
-    firstName: string,
-    lastName: string,
-    phone: string,
-    email: string,
-    city: string,
-    street: string,
-    houseNumber: string,
-    country: string,
-    password: string,
-): boolean {
-
-    if (!firstName ||
-        !lastName ||
-        !phone ||
-        !email ||
-        !city ||
-        !street ||
-        !houseNumber ||
-        !country ||
-        !password
-    ) {
-        return false
-    }
-
-    if (firstName.length < 2 || lastName.length < 2) {
-        return false
-    }
-    if (password.length < 6 || password.length > 15) {
-        return false
-    }
-
-    const emailRe = /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/
-    if (!emailRe.test(email)) {
-        return false
-    }
-
-    return true
-}
-
 

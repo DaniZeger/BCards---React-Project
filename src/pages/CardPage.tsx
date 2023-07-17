@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react"
 import { CARDS, getCardById } from "../services/cardsApi"
 import { NavLink, useParams } from "react-router-dom"
-import { Grid, List, ListItem, ListItemIcon, ListItemText, Typography, styled } from "@mui/material"
+import { Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material"
 import Map from "../components/Map"
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';

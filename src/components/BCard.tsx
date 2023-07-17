@@ -1,11 +1,10 @@
 import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import CardButtons from "./CardButtons";
-import { CARDS, deleteCards } from "../services/cardsApi";
+import { deleteCards } from "../services/cardsApi";
 import { cardsContext } from "../pages/MyCardsPage";
 import { NavLink, useNavigate } from "react-router-dom";
-import { userContext } from "../App";
-import { FavoriteContext } from "./FavoriteContext";
+
 
 interface cardProps {
     image?: string,
@@ -19,13 +18,9 @@ interface cardProps {
 
 
 function BCard({ image, title, subtitle, phone, address, cardId }: cardProps) {
-
     const [width, setWidth] = useState(window.innerWidth);
     const context = useContext(cardsContext)
-    const uContext = useContext(userContext)
     const navigation = useNavigate()
-
-
 
     useEffect(() => {
         function handleResize() {

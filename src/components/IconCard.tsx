@@ -1,5 +1,4 @@
-import { ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from "@mui/material";
-import ImageIcon from '@mui/icons-material/Image';
+import { ListItem, ListItemAvatar, Avatar, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { useEffect, useState } from "react";
 

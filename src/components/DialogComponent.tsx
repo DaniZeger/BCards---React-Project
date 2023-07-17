@@ -1,5 +1,5 @@
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 interface Props {
     handleClick: (userId: string) => void;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 
 const containerStyle = {

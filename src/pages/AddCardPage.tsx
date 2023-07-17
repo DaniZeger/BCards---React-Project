@@ -3,14 +3,13 @@ import FormLayout from "../components/Forms/FormLayout";
 import FormHeader from "../components/Forms/FormsHeader";
 import InputContainer from "../components/Forms/InputContainer";
 import FormControlComponent from "../components/Forms/FormControlComponent";
-import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, FormHelperText, Snackbar, Alert, Slide, SlideProps } from "@mui/material";
+import { Snackbar, Alert, Slide, SlideProps } from "@mui/material";
 import { COUNTRIES_CODE, getCountriesCode } from "../services/contriesApi";
 import ButtonsComponent from "../components/Forms/ButtunsComponent";
 import { useNavigate } from "react-router-dom";
 import { CARDS, addCards } from "../services/cardsApi";
 import { userContext } from "../App";
-import { signUp } from "../services/usersApi";
-import { formsLengthValidate, formsRequireValidate, formsMailValidate, formsPasswordValidate } from "../services/validations";
+import { formsLengthValidate, formsRequireValidate, formsMailValidate } from "../services/validations";
 import PhoneCodeSelect from "../components/Forms/PhoneCodeSelect";
 import CountrySelect from "../components/Forms/CountrySelect";
 

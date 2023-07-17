@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { userContext } from "../App";
 import { FavoriteContext } from "./FavoriteContext";
 

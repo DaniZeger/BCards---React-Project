@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext, createContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { FAV, USER_FAV, getUserCards } from "../services/favorietsApi"
+import { USER_FAV, getUserCards } from "../services/favorietsApi"
 import { userContext } from "../App"
 import Header from "../components/Header"
 import { Grid } from "@mui/material"

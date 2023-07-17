@@ -1,18 +1,16 @@
 import { Box, FormControlLabel, Checkbox, Alert, Snackbar, SlideProps, Slide, Typography } from "@mui/material";
-import { error } from "console";
 import ButtonsComponent from "../components/Forms/ButtunsComponent";
 import CountrySelect from "../components/Forms/CountrySelect";
 import FormControlComponent from "../components/Forms/FormControlComponent";
 import FormLayout from "../components/Forms/FormLayout";
 import FormHeader from "../components/Forms/FormsHeader";
 import InputContainer from "../components/Forms/InputContainer";
-import PasswordInput from "../components/Forms/PasswordInput";
 import PhoneCodeSelect from "../components/Forms/PhoneCodeSelect";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { COUNTRIES_CODE, getCountriesCode } from "../services/contriesApi";
-import { USER, editUser, getUserById, signUp } from "../services/usersApi";
-import { formsLengthValidate, formsRequireValidate, formsMailValidate, formsPasswordValidate } from "../services/validations";
+import { USER, editUser, getUserById } from "../services/usersApi";
+import { formsLengthValidate, formsRequireValidate, formsMailValidate } from "../services/validations";
 
 function EditUserPage() {
     const navigation = useNavigate()

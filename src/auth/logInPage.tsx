@@ -1,10 +1,9 @@
-import { Alert, Box, Button, ButtonGroup, Slide, SlideProps, Snackbar, Typography } from "@mui/material";
+import { Alert, Slide, SlideProps, Snackbar, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import FormControlComponent from "../components/Forms/FormControlComponent";
 import PasswordInput from "../components/Forms/PasswordInput";
-import ReplayIcon from '@mui/icons-material/Replay';
 import ButtonsComponent from "../components/Forms/ButtunsComponent";
-import { USER, logIn } from "../services/usersApi";
+import { logIn } from "../services/usersApi";
 import { formsMailValidate, formsPasswordValidate } from "../services/validations";
 import { setToken } from "./TokenManeger";
 import { useNavigate } from "react-router-dom";
